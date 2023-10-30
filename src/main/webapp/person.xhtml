@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <title>Person Page</title> 
+</h:head>
+<h:body>
+   <h:form id="testForm">
+       
+        <p:growl id="infoMsg" showDetail="true"/> 
+        
+        <h1>Person</h1>
+        <br/>Bitte geben Sie Vor- und Nachname ein ...
+        <br/><br/>
+        
+        <p:panelGrid columns="2" styleClass="ui-panelgrid-blank ui-fluid" > 
+            
+            <p:outputLabel for="ipFirstname" value="Vorname"/>
+            <p:inputText id="ipFirstname" value="#{personBean.person.firstname}"/>
+            
+            <p:outputLabel for="ipLastname" value="Nachname"/>
+            <p:inputText id="ipLastname" value="#{personBean.person.lastname}"/>
+        </p:panelGrid>
+        <br/>
+        
+        <p:commandButton value="Speichern" action="#{personBean.addPerson()}" update=":testForm" style="width: 180px;" />
+        &nbsp;
+        <p:commandButton value="Reset" action="#{personBean.resetPerson()}" update=":testForm" style="width: 180px;" />
+        <br/><br/><br/><br/> 
+
+        <p:dataTable value="#{personBean.personList}" var="person" style="width: 700px;"> 
+            <p:column headerText="Vorname">
+                <h:outputText value="#{person.firstname}" />
+            </p:column>
+            <p:column headerText="Nachname">
+                <h:outputText value="#{person.lastname}" />
+            </p:column>        
+            <p:column headerText="Optionen">
+                <p:commandLink value="bearbeiten" action="#{personBean.setPerson(person)}" update=":testForm"/>
+                &nbsp;&nbsp;&nbsp;
+                <p:commandLink value="l&ouml;schen" action="#{personBean.deletePerson(person)}" update=":testForm"/>
+            </p:column>        
+        </p:dataTable>
+
+        
+    </h:form>          
+</h:body>
+</html>
