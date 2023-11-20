@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://java.sun.com/jsf/html
+http://java.sun.com/jsf/html
+http://java.sun.com/jsf/html ">
+<h:head>
+    <title>Test Page</title>
+</h:head>
+<h:body>
+    <h:form id="testForm">
+
+        <p:growl id="infoMsg" showDetail="true"/>
+
+        <h1>Test-Seite</h1>
+        <br/>Bitte geben Sie Vor- und Nachname ein ...
+        <br/><br/>
+
+        <p:panelGrid columns="2" styleClass="ui-panelgrid-blank ui-fluid">
+
+            <p:outputLabel for="ipFirstname" value="Vorname"/>
+            <p:inputText id="ipFirstname" value="#{testBean.firstname}"/>
+
+            <p:outputLabel for="ipLastname" value="Nachname"/>
+            <p:inputText id="ipLastname" value="#{testBean.lastname}"/>
+        </p:panelGrid>
+        <br/>
+
+        <p:commandButton value="Klick mich ..." action="#{testBean.doTest()}" update=":testForm:infoMsg"
+                         style="width: 180px;"/>
+        &nbsp;
+        <p:commandButton value="Reset" action="#{testBean.resetFields()}" update=":testForm" style="width: 180px;"/>
+        <br/>
+        <br/>
+
+    </h:form>
+</h:body>
+</html>

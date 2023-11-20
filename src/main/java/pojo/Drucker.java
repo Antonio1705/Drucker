@@ -3,16 +3,9 @@ package pojo;
 import javax.swing.*;
 import java.time.LocalDate;
 
-public class Drucker {
+public class Drucker extends Hardware {
 
-    private static int anzahl = 1;
-    private int id;
-    private String serienNummer;
-    private String modell;
-    private String  hersteller;
-    private String status = "OK";
-    private int herstellerGarantie;
-    private LocalDate lieferDatum;
+
     private String  techonologie;
     private boolean farbdruckFunktion;
     private String papierFormatMax;
@@ -24,13 +17,8 @@ public class Drucker {
     public Drucker(String serienNummer, String modell, String hersteller, String status, int herstellerGarantie,
                    LocalDate lieferDatum, String techonologie, boolean farbdruckFunktion, String papierFormatMax)
     {
-        this();
-        this.serienNummer = serienNummer;
-        this.modell = modell;
-        this.hersteller = hersteller;
-        this.status = status;
-        this.herstellerGarantie = herstellerGarantie;
-        this.lieferDatum = lieferDatum;
+        super(serienNummer,modell,hersteller,status,herstellerGarantie,lieferDatum);
+
         this.techonologie = techonologie;
         this.farbdruckFunktion = farbdruckFunktion;
         this.papierFormatMax = papierFormatMax;
@@ -38,25 +26,12 @@ public class Drucker {
     }
 
     public Drucker(){
-        this.id = anzahl;
-        anzahl +=1;
+        super();
     }
 
-    public static int getAnzahl() {
-        return anzahl;
-    }
 
-    public static void setAnzahl(int anzahl) {
-        Drucker.anzahl = anzahl;
-    }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
 
     public void wechselBetriebesmittelnd(int newKapazitaet){
@@ -69,49 +44,7 @@ public class Drucker {
         }
     }
 
-    public String getModell() {
-        return modell;
-    }
 
-    public String getSerienNummer() {
-        return serienNummer;
-    }
-
-    public void setSerienNummer(String serienNummer) {
-        this.serienNummer = serienNummer;
-    }
-
-    public String getHersteller() {
-        return hersteller;
-    }
-
-    public void setHersteller(String hersteller) {
-        this.hersteller = hersteller;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public int getHerstellerGarantie() {
-        return herstellerGarantie;
-    }
-
-    public void setHerstellerGarantie(int herstellerGarantie) {
-        this.herstellerGarantie = herstellerGarantie;
-    }
-
-    public LocalDate getLieferDatum() {
-        return lieferDatum;
-    }
-
-    public void setLieferDatum(LocalDate lieferDatum) {
-        this.lieferDatum = lieferDatum;
-    }
 
     public String getTechonologie() {
         return techonologie;
@@ -161,13 +94,11 @@ public class Drucker {
         this.kapazitetBetriebsMittel = kapazitetBetriebsMittel;
     }
 
-    public void setModell(String modell) {
-        this.modell = modell;
-    }
+
 
     public LocalDate berechneGarantieEnde(){
-        JOptionPane.showMessageDialog(null,"Lieferdatum: "+lieferDatum + "\nGerantieende:"+lieferDatum.plusMonths(herstellerGarantie));
-        return lieferDatum.plusMonths(herstellerGarantie);
+        JOptionPane.showMessageDialog(null,"Lieferdatum: "+super.getLieferDatum() + "\nGerantieende:"+super.getLieferDatum().plusMonths(super.getHerstellerGarantie()));
+        return super.getLieferDatum().plusMonths(super.getHerstellerGarantie());
     }
 
     public void drucken(int anzahlSeiten){
@@ -194,13 +125,13 @@ public class Drucker {
     @Override
     public String toString() {
         return "Drucker{" +
-                "id=" + id +
-                ", serienNummer='" + serienNummer + '\'' +
-                ", modell='" + modell + '\'' +
-                ", hersteller='" + hersteller + '\'' +
-                ", status='" + status + '\'' +
-                ", herstellerGarantie=" + herstellerGarantie +
-                ", lieferDatum=" + lieferDatum +
+                "id=" + super.getId() +
+                ", serienNummer='" + super.getSerienNummer() + '\'' +
+                ", modell='" + super.getModell() + '\'' +
+                ", hersteller='" + super.getHersteller() + '\'' +
+                ", status='" + super.getStatus() + '\'' +
+                ", herstellerGarantie=" + super.getHerstellerGarantie()+
+                ", lieferDatum=" + super.getLieferDatum() +
                 ", techonologie='" + techonologie + '\'' +
                 ", farbdruckFunktion=" + farbdruckFunktion +
                 ", papierFormatMax='" + papierFormatMax + '\'' +
@@ -209,4 +140,6 @@ public class Drucker {
                 ", kapazitetBetriebsMittel=" + kapazitetBetriebsMittel +
                 '}';
     }
+
+
 }

@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <title>Drucker Page</title>
+</h:head>
+<h:body>
+   <h:form id="testForm">
+       
+        <p:growl id="infoMsg" showDetail="true"/> 
+        
+        <h1>Druckerverwaltung</h1>
+        <br/>
+        <br/><br/>
+        
+        <p:panelGrid columns="2" styleClass="ui-panelgrid-blank ui-fluid" > 
+            
+            <p:outputLabel for="ipDrucker" value="Id"/>
+            <p:inputText id="ipDrucker" value="#{druckerBean.drucker.id}" disabled="true"/>
+            
+            <p:outputLabel for="ipSerienNummer" value="SerienNummer"/>
+            <p:inputText id="ipSerienNummer" value="#{druckerBean.drucker.serienNummer}"/>
+
+            <p:outputLabel for="ipModell" value="Modell"/>
+            <p:inputText id="ipModell" value="#{druckerBean.drucker.modell}"/>
+
+            
+            <p:outputLabel for="ipHersteller" value="Hersteller"/>
+            <p:inputText id="ipHersteller" value="#{druckerBean.drucker.hersteller}"/>
+
+         
+            <p:outputLabel for="ipStatus" value="Status"/>
+            <p:selectOneMenu id="ipStatus" value="#{druckerBean.drucker.status}">
+                <f:selectItem itemLabel="" itemValue=""/>
+                <f:selectItem itemLabel="Ok" itemValue="Ok"/>
+                <f:selectItem itemLabel="Reparatur" itemValue="Reparatur"/>
+                <f:selectItem itemLabel="Defekt" itemValue="Defekt"/>
+            </p:selectOneMenu>
+           
+
+            <p:outputLabel for="ipHerstellerGarantie" value="HerstellerGarantie"/>
+            <p:inputText id="ipHerstellerGarantie" value="#{druckerBean.drucker.herstellerGarantie}"/>
+
+            
+            <p:outputLabel for="ipLieferDatum" value="Lieferdatum"/>
+            <p:datePicker id="ipLieferDatum" value="#{druckerBean.drucker.lieferDatum}"/>
+
+            
+            <p:outputLabel for="ipFarbFunktion" value="Farbfunktion"/>
+            <p:selectBooleanCheckbox id="ipFarbFunktion" value="#{druckerBean.drucker.farbdruckFunktion}" itemLabel = "Ja">
+                
+            </p:selectBooleanCheckbox>
+
+            
+            <p:outputLabel for="ipTechnologie" value="Technologie"/>
+            <p:selectOneMenu id="ipTechnologie" value="#{druckerBean.drucker.techonologie}">
+                <f:selectItem itemLabel="" itemValue=""/>
+                <f:selectItem itemLabel="Farbtintenstrahldrucker" itemValue="Farbtintenstrahldrucker"/>
+                <f:selectItem itemLabel="Tintenstrahldrucker" itemValue="Tintenstrahldrucker"/>
+                <f:selectItem itemLabel="Farblaserdrucker" itemValue="Farblaserdrucker"/>
+                <f:selectItem itemLabel="Laserdrucker" itemValue="Laserdrucker"/>
+            </p:selectOneMenu>
+
+
+            
+            <p:outputLabel for="ipMaxPapierformat" value="Max.PapierFormat"/>
+            <p:selectOneMenu id="ipMaxPapierformat" value="#{druckerBean.drucker.papierFormatMax}">
+                <f:selectItem itemLabel="" itemValue=""/>
+                <f:selectItem itemLabel="A4" itemValue="A4"/>
+                <f:selectItem itemLabel="A3" itemValue="A3"/>
+            </p:selectOneMenu>
+
+            <p:outputLabel for="ipInsgesamtGedruckt" value="InsgesamtGedruckt"/>
+            <p:inputText id="ipInsgesamtGedruckt" value="#{druckerBean.drucker.druckerSeitenGesamt}" disabled = "true"/>
+
+            <p:outputLabel for="restKapazitetBetriebsmittel" value="Restkapazitet Betriebsmittel (Seitenanzahl)"/>
+            <p:inputText id="restKapazitetBetriebsmittel" value="#{druckerBean.drucker.restKapazitaet}" disabled = "true"/>
+
+            <p:outputLabel for="ipKapazitetBetriebsmittels" value="Kapazitet des BetreibsMittels (Seitenanzahl)"/>
+            <p:inputText id="ipKapazitetBetriebsmittels" value="#{druckerBean.drucker.kapazitetBetriebsMittel}" disabled = "true"/>
+        </p:panelGrid>
+        <br/>
+        
+        <p:commandButton value="Speichern" action="#{druckerBean.addDrucker()}" update=":testForm" style="width: 180px;" />
+        &nbsp;
+        <p:commandButton value="Reset" action="#{druckerBean.resetDrucker()}" update=":testForm" style="width: 180px;" />
+        <br/><br/><br/><br/> 
+
+        <p:dataTable value="#{druckerBean.druckerList}" var="drucker" style="width: 700px;"> 
+            <p:column headerText="DruckerId">
+                <h:outputText value="#{drucker.id}" />
+            </p:column>
+            <p:column headerText="Hersteller">
+                <h:outputText value="#{drucker.hersteller}" />
+            </p:column>    
+            <p:column headerText="Modell">
+                <h:outputText value="#{drucker.modell}" />
+            </p:column>        
+            <p:column headerText="Optionen">
+                <p:commandLink value="bearbeiten" action="#{druckerBean.setDrucker(drucker)}" update=":testForm"/>
+                &nbsp;&nbsp;&nbsp;
+                <p:commandLink value="l&ouml;schen" action="#{druckerBean.deleteDrucker(drucker)}" update=":testForm"/>
+            </p:column>        
+        </p:dataTable>
+
+        
+    </h:form>          
+</h:body>
+</html>

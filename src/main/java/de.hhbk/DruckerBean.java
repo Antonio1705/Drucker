@@ -1,7 +1,5 @@
 package de.hhbk;
 
-
-
 import pojo.Drucker;
 
 import java.io.Serializable;
@@ -92,7 +90,6 @@ public class DruckerBean implements Serializable
         resetDrucker();
 
     }
-
 
 
 

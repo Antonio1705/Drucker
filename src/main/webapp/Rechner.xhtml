@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <title>Rechner Page</title>
+</h:head>
+<h:body>
+   <h:form id="testForm">
+       
+        <p:growl id="infoMsg" showDetail="true"/> 
+        
+        <h1>Rechnerverwaltung</h1>
+        <br/>
+        <br/><br/>
+        
+        <p:panelGrid columns="2" styleClass="ui-panelgrid-blank ui-fluid" > 
+            
+            <p:outputLabel for="ipRechner" value="Id"/>
+            <p:inputText id="ipRechner" value="#{rechnerBean.rechner.id}" disabled="true"/>
+            
+            <p:outputLabel for="ipSerienNummer" value="SerienNummer"/>
+            <p:inputText id="ipSerienNummer" value="#{rechnerBean.rechner.serienNummer}"/>
+
+            <p:outputLabel for="ipModell" value="Modell"/>
+            <p:inputText id="ipModell" value="#{rechnerBean.rechner.modell}"/>
+
+            
+            <p:outputLabel for="ipHersteller" value="Hersteller"/>
+            <p:inputText id="ipHersteller" value="#{rechnerBean.rechner.hersteller}"/>
+
+         
+            <p:outputLabel for="ipStatus" value="Status"/>
+            <p:selectOneMenu id="ipStatus" value="#{rechnerBean.rechner.status}">
+                <f:selectItem itemLabel="" itemValue=""/>
+                <f:selectItem itemLabel="Ok" itemValue="Ok"/>
+                <f:selectItem itemLabel="Reparatur" itemValue="Reparatur"/>
+                <f:selectItem itemLabel="Defekt" itemValue="Defekt"/>
+            </p:selectOneMenu>
+           
+
+            <p:outputLabel for="ipHerstellerGarantie" value="HerstellerGarantie"/>
+            <p:inputText id="ipHerstellerGarantie" value="#{rechnerBean.rechner.herstellerGarantie}"/>
+
+            
+            <p:outputLabel for="ipLieferDatum" value="Lieferdatum"/>
+            <p:datePicker id="ipLieferDatum" value="#{rechnerBean.rechner.lieferDatum}"/>
+
+
+
+            <p:outputLabel for="ipCpu" value="Cpu"/>
+            <p:inputText id="ipCpu" value="#{rechnerBean.rechner.cpu}"/>
+
+            <p:outputLabel for="ipArbeitsspeicher" value="Arbeitsspeicher"/>
+            <p:inputText id="ipArbeitsspeicher" value="#{rechnerBean.rechner.arbeitsspeicher}"/>
+
+            <p:outputLabel for="ipBetriebssysteme" value="Betriebssysteme"/>
+            <p:inputText id="ipBetriebssysteme" value="#{rechnerBean.rechner.betribssysteme}"/>
+
+
+
+            <p:outputLabel for="ipTyp" value="Typ"/>
+            <p:selectOneMenu id="ipTyp" value="#{rechnerBean.rechner.typ}">
+                <f:selectItem itemLabel="" itemValue=""/>
+                <f:selectItem itemLabel="Gaming-PC" itemValue="Gaming-PC"/>
+                <f:selectItem itemLabel="Multimedia-PC" itemValue="Multimedia-PC"/>
+                <f:selectItem itemLabel="Office-PC" itemValue="Office-PC"/>
+            </p:selectOneMenu>
+
+
+            <p:outputLabel for="ipGrafikkarte" value="grafikKarte"/>
+            <p:inputText id="ipGrafikkarte" value="#{rechnerBean.rechner.grafikKarte}"/>
+
+
+            <p:outputLabel for="ipFestplatteSSD" value="festPlatteSSD"/>
+            <p:inputText id="ipFestplatteSSD" value="#{rechnerBean.rechner.festPlatteSSD}"/>
+
+            <p:outputLabel for="ipFestplatteHDD" value="festPlatteHdd"/>
+            <p:inputText id="ipFestplatteHDD" value="#{rechnerBean.rechner.festPlatteHdd}"/>
+
+
+        </p:panelGrid>
+        <br/>
+        
+        <p:commandButton value="Speichern" action="#{rechnerBean.addRechner()}" update=":testForm" style="width: 180px;" />
+        &nbsp;
+        <p:commandButton value="Reset" action="#{rechnerBean.resetRechner()}" update=":testForm" style="width: 180px;" />
+        <br/><br/><br/><br/> 
+
+        <p:dataTable value="#{rechnerBean.rechnerList}" var="rechner" style="width: 700px;">
+            <p:column headerText="RechnerId">
+                <h:outputText value="#{rechner.id}" />
+            </p:column>
+            <p:column headerText="Hersteller">
+                <h:outputText value="#{rechner.hersteller}" />
+            </p:column>    
+            <p:column headerText="Modell">
+                <h:outputText value="#{rechner.modell}" />
+            </p:column>        
+            <p:column headerText="Optionen">
+                <p:commandLink value="bearbeiten" action="#{rechnerBean.setRechner(rechner)}" update=":testForm"/>
+                &nbsp;&nbsp;&nbsp;
+                <p:commandLink value="l&ouml;schen" action="#{rechnerBean.deleteRechner(rechner)}" update=":testForm"/>
+            </p:column>        
+        </p:dataTable>
+
+        
+    </h:form>          
+</h:body>
+</html>
