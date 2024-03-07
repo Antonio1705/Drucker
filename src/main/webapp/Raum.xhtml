@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <title>Raum Page</title>
+</h:head>
+<h:body>
+   <h:form id="testForm">
+       
+        <p:growl id="infoMsg" showDetail="true"/> 
+        
+        <h1>Raumverwaltung</h1>
+        <br/>
+        <br/><br/>
+        
+        <p:panelGrid columns="2" styleClass="ui-panelgrid-blank ui-fluid" > 
+            
+            <p:outputLabel for="ipRaum" value="Id"/>
+            <p:inputText id="ipRaum" value="#{raumBean.raum.id}" disabled="true"/>
+            
+            <p:outputLabel for="ipBezeichnung" value="Bezeichnung"/>
+            <p:inputText id="ipBezeichnung" value="#{raumBean.raum.bezeichnung}"/>
+         
+            <p:outputLabel for="ipTyp" value="Typ"/>
+            <p:selectOneMenu id="ipTyp" value="#{raumBean.raum.typ}">
+                <f:selectItem itemLabel="" itemValue=""/>
+                <f:selectItem itemLabel="Klassenraum" itemValue="Klassenraum"/>
+                <f:selectItem itemLabel="IT Fachraum" itemValue="IT Fachraum"/>
+                <f:selectItem itemLabel="ET Fachraum" itemValue="ET Fachraum"/>
+                <f:selectItem itemLabel="CH Labor" itemValue="CH Labor"/>
+                <f:selectItem itemLabel="Serviceraum" itemValue="Serviceraum"/>
+                <f:selectItem itemLabel="Lehrervorbereitungsraum" itemValue="Lehrervorbereitungsraum"/>
+                <f:selectItem itemLabel="Büro" itemValue="Büro"/>
+                <f:selectItem itemLabel="Sonstiges" itemValue="Sonstiges"/>
+            </p:selectOneMenu>
+
+        </p:panelGrid>
+        <br/>
+        
+        <p:commandButton value="Speichern" action="#{raumBean.addRaum()}" update=":testForm" style="width: 180px;" />
+        &nbsp;
+        <p:commandButton value="Reset" action="#{raumBean.resetRaum()}" update=":testForm" style="width: 180px;" />
+        <br/><br/><br/><br/> 
+
+        <p:dataTable value="#{raumBean.raumList}" var="raum" style="width: 700px;">
+            <p:column headerText="RaumId">
+                <h:outputText value="#{raum.id}" />
+            </p:column>
+            <p:column headerText="Bezeichnung">
+                <h:outputText value="#{raum.bezeichnung}" />
+            </p:column>    
+            <p:column headerText="Typ">
+                <h:outputText value="#{raum.typ}" />
+            </p:column>        
+            <p:column headerText="Optionen">
+                <p:commandLink value="bearbeiten" action="#{raumBean.setRaum(raum)}" update=":testForm"/>
+                &nbsp;&nbsp;&nbsp;
+                <p:commandLink value="l&ouml;schen" action="#{raumBean.deleteRaum(raum)}" update=":testForm"/>
+            </p:column>        
+        </p:dataTable>
+
+        
+    </h:form>          
+</h:body>
+</html>

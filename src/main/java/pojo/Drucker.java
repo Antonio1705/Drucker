@@ -1,10 +1,17 @@
 package pojo;
 
+import de.hhbk.RaumBean;
+
+
+import javax.inject.Inject;
+
 import javax.swing.*;
 import java.time.LocalDate;
 
 public class Drucker extends Hardware {
 
+    @Inject
+    RaumBean raumBean;
 
     private String  techonologie;
     private boolean farbdruckFunktion;
@@ -12,6 +19,8 @@ public class Drucker extends Hardware {
     private int druckerSeitenGesamt;
     private int restKapazitaet = 200;
     private int kapazitetBetriebsMittel = 200;
+
+
 
 
     public Drucker(String serienNummer, String modell, String hersteller, String status, int herstellerGarantie,
@@ -121,6 +130,8 @@ public class Drucker extends Hardware {
         }
 
     }
+
+
 
     @Override
     public String toString() {

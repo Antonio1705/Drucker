@@ -12,6 +12,15 @@ public class Hardware {
     private String status = "OK";
     private int herstellerGarantie;
     private LocalDate lieferDatum;
+    private Raum raum;
+
+    public Raum getRaum() {
+        return raum;
+    }
+
+    public void setRaum(Raum raum) {
+        this.raum = raum;
+    }
 
     public Hardware(String serienNummer, String modell, String hersteller, String status, int herstellerGarantie, LocalDate lieferDatum) {
         this();

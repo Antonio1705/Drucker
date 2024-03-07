@@ -1,0 +1,41 @@
+<img class="Jmlpdc" loading="lazy" src="blob:https://translate.google.com/ff039ce0-171c-440d-9e33-4637eb67b834" alt="
+
+<p:dialog header="Raum zuordnen" widgetVar="dlgRooms" modal="true" position="center, top" style="margin-top: 40px;">
+    <div style="width: 830px; margin: 0px 10px 10px 10px;">
+    <h: form id="roomDialogForm">
+
+        <p:scrollPanel mode="native" style"width:100%; height:400px; margin-top: 7px;">
+
+            <p:dataTable id="roomsTable" var="raum" value="#{raumBean.raumList}" style="width: 100%;">
+                <p:column headerText="Bezeichnung">
+                    <h:outputText value="#{raum.bezeichnung)" />
+                </p:column>
+                <p:column headerText="Typ">
+                    <h: outputText value="#{raum.typ}" />
+                </p:column>
+
+                <p:column headerText="Optionen" style="width: 110px; text-align: center;">
+                    <p:commandLink action="#{raum.addHardware (druckerBean.drucker)}" update=":testForm">
+                        <i class="fa fa-plus"></i>
+                    </p: commandLink>
+                </p:column>
+            </p:dataTable>
+        </p:scrollPanel>
+        <br/>
+        <p: commandButton value="Schliesszlig;en" style="width: 120px;" onclick="PF('dlgRooms').hide();" immediate="true"/>
+    </h:form>
+    </div>
+</p:dialog>
+
+
+<p:outputLabel for="ipRaum" value="Raum"/>
+<p:outputPanel id="ipRaum" style="display:block">
+<p:inputText value="#{druckerBean.drucker.raum.bezeichnung}" style="width: 60px;" disabled="true"
+             rendered="#{druckerBean.drucker.hasRaum()}"/>
+&nbsp;
+<p:commandButton onclick="PF('dlgRooms').show();" icon="fa fa-plus"
+                 style="font-size: 15px; height: 30px; width: 30px;" rendered="#{not druckerBean.drucker.hasRaum()}"/>
+<p:commandButton action="#{druckerBean.drucker.raum.removeHardware(druckerBean.drucker)}" icon="fa fa-trash"
+                 style="font-size: 15px; height: 30px; width: 30px;" update=":testForm"
+                 rendered="#{druckerBean.drucker.hasRaum()}"/>
+</p:outputPanel>
